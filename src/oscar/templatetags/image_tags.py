@@ -2,6 +2,8 @@ from django import template
 from django.conf import settings
 from django.db.models.fields.files import ImageFieldFile
 
+from sorl.thumbnail.templatetags.thumbnail import ThumbnailNode
+
 register = template.Library()
 
 
@@ -69,3 +71,8 @@ class DynamicImageNode(template.Node):
 
 
 register.tag('image', do_dynamic_image_url)
+
+
+@register.tag
+def thumbnail(parser, token):
+    return ThumbnailNode(parser, token)
