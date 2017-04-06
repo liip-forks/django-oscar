@@ -1065,16 +1065,16 @@ class MissingProductImage(object):
 
     def __init__(self, name=None):
         self.name = name if name else settings.OSCAR_MISSING_IMAGE_URL
+        self.static_file_path = find('oscar/img/%s' % self.name)
         media_file_path = os.path.join(settings.MEDIA_ROOT, self.name)
         # don't try to symlink if MEDIA_ROOT is not set (e.g. running tests)
         if settings.MEDIA_ROOT and not os.path.exists(media_file_path):
             self.symlink_missing_image(media_file_path)
 
     def symlink_missing_image(self, media_file_path):
-        static_file_path = find('oscar/img/%s' % self.name)
-        if static_file_path is not None:
+        if self.static_file_path is not None:
             try:
-                os.symlink(static_file_path, media_file_path)
+                os.symlink(self.static_file_path, media_file_path)
             except OSError:
                 raise ImproperlyConfigured((
                     "Please copy/symlink the "

@@ -251,5 +251,7 @@ OSCAR_SEARCH_FACETS = {
 OSCAR_PROMOTIONS_ENABLED = True
 OSCAR_PRODUCT_SEARCH_HANDLER = None
 
+OSCAR_THUMBNAILER = 'sorl.thumbnail'
+
 OSCAR_SETTINGS = dict(
     [(k, v) for k, v in locals().items() if k.startswith('OSCAR_')])

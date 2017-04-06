@@ -1,4 +1,4 @@
-{% load thumbnail %}
+{% load thumbnail from oscar_thumbnails %}
 {% if record.primary_image.original.url %}
     {% with image=record.primary_image %}
         {% thumbnail image.original "70x70" upscale=False as thumb %}
